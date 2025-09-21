@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<th:block th:replace="~{fragments/head::head(title='Novo cliente')}"></th:block>
+
+<body>
+	<header class="">
+		<th:block th:replace="~{fragments/navbar::navbar}"></th:block>
+	</header>
+	<main class="container my-5">
+		<form method="post" th:object=${clienteDto} th:action="@{/clientes}">
+
+			<div class="mb-3">
+				<label for="nome" class="form-label">Nome</label> <input type="text"
+					class="form-control"
+					th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'"
+					th:field="*{nome}" required>
+				<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+					class="invalid-feedback"></div>
+			</div>
+
+			<div class="mb-3">
+				<label for="documento" class="form-label">Documento (CPF ou
+					CNPJ)</label> <input type="text" class="form-control"
+					th:classappend="${#fields.hasErrors('documento')} ? 'is-invalid'  "
+					th:field="*{documento}" required>
+				<div th:if="${#fields.hasErrors('documento')}"
+					th:errors="*{documento}" class="invalid-feedback"></div>
+			</div>
+
+			<div class="mb-3">
+				<label for="email" class="form-label">Email</label> <input
+					type="email" class="form-control"
+					th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' "
+					th:field=*{email} required>
+			</div>
+
+			<div class="mb-3">
+				<label for="cep" class="form-label">CEP (00000-00)</label> <input type="text"
+					class="form-control"
+					th:classappend="${#fields.hasErrors('cep')} ? 'is-invalid' "
+					th:field=*{cep} required>
+			</div>
+
+			<div class="mb-3">
+				<label for="telefone" class="form-label">Telefone</label> <input
+					type="text" class="form-control"
+					th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid' "
+					th:field=*{telefone} required>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</main>
+</body>
+</html>

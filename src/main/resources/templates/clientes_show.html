@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<th:block th:replace="~{fragments/head::head(title='clientes')}"></th:block>
+<body>
+	<header class="">
+		<th:block th:replace="~{fragments/navbar::navbar}"></th:block>
+	</header>
+	<main class="container my-5">
+	<div th:object=${clienteDto}>
+		<p th:text="*{id}"></p>
+		<p th:text="*{nome}"></p>
+		<p th:text="*{documento}"></p>
+		<p th:text="*{email}"></p>
+		<p th:text="*{telefone}"></p>
+		<p th:text="*{cep}"></p>
+		<p th:text="*{uf}"></p>
+		<p th:text="*{cidade}"></p>
+		<p th:text="*{bairro}"></p>
+		
+	</div>
+	</main>
+</body>
+</html>

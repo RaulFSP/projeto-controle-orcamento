@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<th:block th:replace="~{fragments/head::head(title='clientes')}"></th:block>
+
+
+<body>
+	<header class="">
+		<th:block th:replace="~{fragments/navbar::navbar}"></th:block>
+	</header>
+	<main class="container my-5">
+
+		<div class="row my-4">
+			<div class="rol">
+			<a type="button" class="btn btn-outline-secondary" th:href=@{/clientes/new}>Novo Cliente</a>
+			</div>
+		</div>
+		<table class="table table-striped-columns">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Documento</th>
+					<th>Email</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cliente : ${clientes}" th:object="${cliente}">
+					<td th:text="*{id}"></td>
+					<td th:text="*{nome}"></td>
+					<td th:text="*{documento}"></td>
+					<td th:text="*{email}"></td>
+					<td>  <a th:href="@{/clientes/{id}(id=${cliente.id})}">Ver Cliente</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</main>
+</body>
+</html>
