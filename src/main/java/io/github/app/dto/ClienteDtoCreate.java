@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
 public record ClienteDtoCreate(
+		Long id,
 		@NotEmpty(message = "o nome não pode ser vazio")
 		@Length(min = 2, max = 100, message = "O nome deve ter mais de 2 caracteres") String nome,
 		@NotEmpty(message = "o número de documento não pode ser vazio")

@@ -12,6 +12,7 @@ public record ClienteDtoReadFull(
 		String uf,
 		String cidade,
 		String bairro,
-		NaturezaJuridica natureza) {
+		NaturezaJuridica natureza,
+		boolean active) {
 
 }

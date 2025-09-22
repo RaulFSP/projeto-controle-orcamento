@@ -25,22 +25,26 @@ public class ClienteMapper {
 	}
 
 	public ClienteDtoReadFull toDtoReadFull(Cliente cliente) {
-		return new ClienteDtoReadFull(cliente.getId(), cliente.getNome(), cliente.getDocumento(), cliente.getEmail(), cliente.getCep(), cliente.getTelefone(), cliente.getUf(), cliente.getCidade(), cliente.getBairro(), cliente.getNaturezaJuridica());
+		return new ClienteDtoReadFull(cliente.getId(), cliente.getNome(), cliente.getDocumento(), cliente.getEmail(), cliente.getCep(), cliente.getTelefone(), cliente.getUf(), cliente.getCidade(), cliente.getBairro(), cliente.getNaturezaJuridica(),cliente.isActive());
 	}
 	
 	public Cliente fromDtoCreate(ClienteDtoCreate dtoCreate) {
 		EnderecoDtoCreate dtoEndereco = viacepApiService
 				.getEndereco(dtoCreate.cep());
 
-		return Cliente.builder().bairro(dtoEndereco.bairro())
-				.cep(dtoCreate.cep()).cidade(dtoEndereco.cidade())
-				.documento(dtoCreate.documento()).email(dtoCreate.email())
+		return Cliente.builder()
+				.bairro(dtoEndereco.bairro())
+				.cep(dtoCreate.cep())
+				.cidade(dtoEndereco.cidade())
+				.documento(dtoCreate.documento())
+				.email(dtoCreate.email())
 				.id(null)
 				.naturezaJuridica(setNaturezaJuridica(dtoCreate.documento()))
 				.nome(dtoCreate.nome())
 				.telefone(dtoCreate.telefone())
 				.uf(dtoEndereco.uf())
 				.version(null)
+				.active(true)
 				.build();
 	}
 	

@@ -11,33 +11,39 @@ import io.github.app.dto.ClienteDtoCreate;
 import io.github.app.mapper.ClienteMapper;
 import io.github.app.repository.ClienteRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ClienteService {
 
 	private final ClienteRepository clienteRepository;
 	private final ClienteMapper clienteMapper;
-	
-	
-	public ClienteService(
-			ClienteRepository clienteRepository,
-			ClienteMapper clienteMapper) {
+
+	public ClienteService(ClienteRepository clienteRepository, ClienteMapper clienteMapper) {
 		this.clienteRepository = clienteRepository;
 		this.clienteMapper = clienteMapper;
 	}
 
 	@Cacheable(value = "clientes")
 	public List<Cliente> findAll() {
-		return clienteRepository.findAll();
+		return clienteRepository.findAllByActiveTrue();
 	}
-	
-	@CacheEvict(value = "clientes",allEntries = true)
+
+	@CacheEvict(value = "clientes", allEntries = true)
 	public Cliente createCliente(ClienteDtoCreate dtoCreate) {
 		Cliente cliente = clienteMapper.fromDtoCreate(dtoCreate);
 		return clienteRepository.save(cliente);
 	}
-	
+	@CacheEvict(value = "clientes", allEntries = true)
+	@Transactional
+	public void deleteClienteById(Long id) {
+		Cliente cliente = clienteRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado pelo id"));
+		cliente.setActive(false);
+	}
+
 	public Cliente findById(Long id) {
-		return clienteRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Cliente não encontrado pelo id"));
+		return clienteRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado pelo id"));
 	}
 }

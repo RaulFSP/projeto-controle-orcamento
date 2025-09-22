@@ -6,18 +6,33 @@
 		<th:block th:replace="~{fragments/navbar::navbar}"></th:block>
 	</header>
 	<main class="container my-5">
-	<div th:object=${clienteDto}>
-		<p th:text="*{id}"></p>
-		<p th:text="*{nome}"></p>
-		<p th:text="*{documento}"></p>
-		<p th:text="*{email}"></p>
-		<p th:text="*{telefone}"></p>
-		<p th:text="*{cep}"></p>
-		<p th:text="*{uf}"></p>
-		<p th:text="*{cidade}"></p>
-		<p th:text="*{bairro}"></p>
-		
-	</div>
+
+		<div class="row mb-4 justify-content-center" th:object="${clienteDto}">
+			<div class="col-sm-12 col-md-4" th:if="${clienteDto.active}">
+				<form th:action="@{/clientes/{id}(id=${clienteDto.id})}"
+					method="post">
+					<input type="hidden" name="_method" value="delete" />
+					<button type="submit" class="btn btn-danger w-100">Desativar</button>
+				</form>
+			</div>
+			<div class="col-sm-12 col-md-4">
+				<a type="button" class="btn btn-warning w-100" th:href="@{/clientes/{id}/edit(id=${clienteDto.id})}">Editar</a>
+			</div>
+		</div>
+
+
+		<div th:object="${clienteDto}">
+			<p th:text="*{id}"></p>
+			<p th:text="*{nome}"></p>
+			<p th:text="*{documento}"></p>
+			<p th:text="*{email}"></p>
+			<p th:text="*{telefone}"></p>
+			<p th:text="*{cep}"></p>
+			<p th:text="*{uf}"></p>
+			<p th:text="*{cidade}"></p>
+			<p th:text="*{bairro}"></p>
+			<p th:text="*{active}"></p>
+		</div>
 	</main>
 </body>
 </html>

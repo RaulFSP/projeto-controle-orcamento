@@ -7,8 +7,13 @@
 		<th:block th:replace="~{fragments/navbar::navbar}"></th:block>
 	</header>
 	<main class="container my-5">
-		<form method="post" th:object=${clienteDto} th:action="@{/clientes}">
-
+	
+		<form 
+		method="post" 
+		th:object=${clienteDto}
+		th:action="${contextPath == '/clientes/new'} ? @{/clientes} : @{/clientes/{id}(id=${clienteDto.id})}">
+		
+		<input type="hidden" name="_method" th:value="${contextPath == '/clientes/new'} ? 'post' : 'put'" />
 			<div class="mb-3">
 				<label for="nome" class="form-label">Nome</label> <input type="text"
 					class="form-control"
@@ -47,7 +52,7 @@
 					th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid' "
 					th:field=*{telefone} required>
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary" th:text="${contextPath == '/clientes/new'} ? 'Criar Cliente' : 'Atualizar Cliente'">Submit</button>
 		</form>
 	</main>
 </body>

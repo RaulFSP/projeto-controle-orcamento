@@ -41,9 +41,12 @@ public class Cliente {
 
 	@Version
 	private Long version;
-	
+
+	private boolean active;
+
 	public Cliente() {
 	}
+
 	private Cliente(Builder builder) {
 		this.id = builder.id;
 		this.nome = builder.nome;
@@ -56,58 +59,77 @@ public class Cliente {
 		this.email = builder.email;
 		this.naturezaJuridica = builder.naturezaJuridica;
 		this.version = builder.version;
+		this.active = builder.active;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getTelefone() {
 		return telefone;
 	}
+
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
 	public String getDocumento() {
 		return documento;
 	}
+
 	public void setDocumento(String documento) {
 		this.documento = documento;
 	}
+
 	public String getBairro() {
 		return bairro;
 	}
+
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
+
 	public String getCidade() {
 		return cidade;
 	}
+
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
+
 	public String getUf() {
 		return uf;
 	}
+
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
+
 	public String getCep() {
 		return cep;
 	}
+
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -115,13 +137,32 @@ public class Cliente {
 	public NaturezaJuridica getNaturezaJuridica() {
 		return naturezaJuridica;
 	}
+
 	public void setNaturezaJuridica(NaturezaJuridica naturezaJuridica) {
 		this.naturezaJuridica = naturezaJuridica;
 	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -134,14 +175,15 @@ public class Cliente {
 		return Objects.equals(id, other.id);
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nome=" + nome + ", telefone=" + telefone
-				+ ", documento=" + documento + ", bairro=" + bairro
-				+ ", cidade=" + cidade + ", uf=" + uf + ", cep=" + cep
-				+ ", email=" + email + ", naturezaJuridica=" + naturezaJuridica
-				+ "]";
+		return "Cliente [id=" + id + ", nome=" + nome + ", telefone=" + telefone + ", documento=" + documento
+				+ ", bairro=" + bairro + ", cidade=" + cidade + ", uf=" + uf + ", cep=" + cep + ", email=" + email
+				+ ", naturezaJuridica=" + naturezaJuridica + ", version=" + version + ", active=" + active + "]";
 	}
+
 	public static Builder builder() {
 		return new Builder();
 	}
@@ -158,51 +200,68 @@ public class Cliente {
 		private String email;
 		private NaturezaJuridica naturezaJuridica;
 		private Long version;
-		
+		private boolean active;
+
 		public Builder id(Long id) {
 			this.id = id;
 			return this;
 		}
+
 		public Builder nome(String nome) {
 			this.nome = nome;
 			return this;
 		}
+
 		public Builder telefone(String telefone) {
 			this.telefone = telefone;
 			return this;
 		}
+
 		public Builder documento(String documento) {
 			this.documento = documento;
 			return this;
 		}
+
 		public Builder bairro(String bairro) {
 			this.bairro = bairro;
 			return this;
 		}
+
 		public Builder cidade(String cidade) {
 			this.cidade = cidade;
 			return this;
 		}
+
 		public Builder uf(String uf) {
 			this.uf = uf;
 			return this;
 		}
+
 		public Builder cep(String cep) {
 			this.cep = cep;
 			return this;
 		}
+
 		public Builder email(String email) {
 			this.email = email;
 			return this;
 		}
+
 		public Builder naturezaJuridica(NaturezaJuridica naturezaJuridica) {
 			this.naturezaJuridica = naturezaJuridica;
 			return this;
 		}
+
 		public Builder version(Long version) {
 			this.version = version;
 			return this;
 		}
+
+		public Builder active(boolean active) {
+			this.active = active;
+			return this;
+		}
+
 		public Cliente build() {
 			return new Cliente(this);
 		}
